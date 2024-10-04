@@ -22,6 +22,7 @@ jobs:
   scanning_package:
     runs-on: ubuntu-latest
     name: Snyk scan package
+    needs: [quality]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
