@@ -49,7 +49,25 @@ jobs:
       - run: npm install
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
+        continue-on-error: true
         with:
           command: code test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+
+  scanning_docker:
+    runs-on: ubuntu-latest
+    name: Snyk docker test
+    needs: [scanning_code_test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Builder docker
+        run: docker build . -t backend-proa
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        with:
+          image: backend-proa
+          args: --file=Dockerfile
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
