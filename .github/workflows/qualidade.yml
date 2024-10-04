@@ -7,7 +7,14 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        node: [18.x, 19.x, 20.x]
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag image_test:$(date +%s)
+    - name: Setup node
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node }}
+    - run: npm install
+    - run: npm run build
