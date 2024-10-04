@@ -1,0 +1,28 @@
+version: '3'
+services:
+  challenge-one:
+    image: challenge-one
+    hostname: challenge.one.hack.com
+    environment:
+      - PORT=3000
+      - HOST_MYSQL=mysql.challenge.com
+      - USER_MYSQL=root
+      - PASS_MYSQL=669440627466909c972d00d5a695c9f4e1e931e1
+      - 
+    deploy:
+      replicas: 4
+      restart_policy:
+        condition: any
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks:
+      - private_network
+
+networks:
+  private_network:
+    external: true
+

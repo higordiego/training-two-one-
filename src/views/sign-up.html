@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        #logo {
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        .register-container {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            width: 300px;
+        }
+
+        .register-container input, .register-container select, .register-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .register-container button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="logo" src="/images/logo_green.svg" alt="Logo">
+    <div class="register-container">
+        <h2>Cadastro</h2>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="profile_pic" placeholder="Profile Picture URL" required>
+            <textarea id="description" placeholder="Description" rows="3"></textarea>
+            <input type="text" id="full_name" placeholder="Full Name" required>
+            <input type="date" id="date_of_birth" placeholder="Date of Birth" required>
+            <input type="text" id="location" placeholder="Location" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const profile_pic = document.getElementById('profile_pic').value;
+            const description = document.getElementById('description').value;
+            const full_name = document.getElementById('full_name').value;
+            const date_of_birth = document.getElementById('date_of_birth').value;
+            const location = document.getElementById('location').value;
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                        email,
+                        profile_pic,
+                        description,
+                        full_name,
+                        date_of_birth,
+                        location
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Cadastro realizado com sucesso!');
+                    window.location.href = '/login';
+                } else {
+                    alert(`Erro: ${data.error}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Erro ao cadastrar. Por favor, tente novamente.');
+            }
+        });
+    </script>
+</body>
+
+</html>

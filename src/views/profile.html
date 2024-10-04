@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        #logo {
+            width: 200px;
+            height: auto;
+            margin-top: 50px;
+        }
+
+        .profile-container {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            width: 800px;
+        }
+
+        .profile-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .profile-container p {
+            margin: 10px 0;
+        }
+
+        .usuario-dados {
+            text-align: left;
+        }
+
+        .usuario-dados p {
+            margin: 0 0 10px 0;
+        }
+
+        .admin-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+        <script>
+            const img = document.getElementById("profilePic")
+            img.addEventListener("error", function(event) {
+            event.target.src = "https://default-image-link-goes-here"
+            event.onerror = null
+            })
+        </script>
+</head>
+
+<body onload="loadUserProfile()">
+    <img id="logo" src="/images/logo_green.svg" alt="Logo">
+    <div class="profile-container">
+        <!-- O conteúdo do perfil será carregado aqui -->
+    </div>
+
+    <script>
+        async function loadUserProfile() {
+            const apiUrl = '/api/user';
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
+
+            try {
+                const response = await fetch(`${apiUrl}/${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const profileContainer = document.querySelector('.profile-container');
+                profileContainer.innerHTML = `
+                    <img src="${data.profile_pic}" id="profilePic" alt="Profile Picture">
+                    <div class="usuario-dados">
+                        <p><b>Username:</b> ${data.username}</p>
+                        <p><b>Email:</b> ${data.email}</p>
+                        <p><b>Description:</b> ${data.description}</p>
+                        <p><b>Full Name:</b> ${data.full_name}</p>
+                        <p><b>Date of Birth:</b> ${new Date(data.date_of_birth).toLocaleDateString()}</p>
+                        <p><b>Location:</b> ${data.location}</p>
+                    </div>
+                `;
+
+                if (data.role === 'admin') {
+                    const adminButton = document.createElement('button');
+                    adminButton.className = 'admin-button';
+                    adminButton.innerText = 'Ver Dashboard';
+                    adminButton.onclick = function() {
+                        window.location.href = '/dashboard';
+                    };
+                    profileContainer.appendChild(adminButton);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>
