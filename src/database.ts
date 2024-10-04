@@ -40,20 +40,20 @@ db.query(createTableQuery, (err : any) => {
 
   const seedUsers: User[] = [
     {
-      username: 'francoatmega',
+      username: 'c4ttr4ck',
       password: '49EFEF5F70D47ADC2DB2EB397FBEF5F7BC560E29',
-      email: 'jardel.matias@hackincariri.com.br',
+      email: 'c4ttr4ck@email.ai',
       profile_pic: 'https://ca.slack-edge.com/T06JRN0TA-U040UG6G4VB-f080d5028a70-512',
       role: 'user',
       description: 'Happy Hacking! ;)',
-      full_name: 'Jardel Matias',
+      full_name: 'c4ttr4ck',
       date_of_birth: '1988-11-30',
       location: 'Juazeiro do Norte, Brasil'
     },
     {
       username: 'higordiego',
       password: 'EC86376E23B99516BB874A35DB8A3CDB6A95987D',
-      email: 'higor.diego@hackincariri.com.br',
+      email: 'higor.diego@email.ai',
       profile_pic: 'https://ca.slack-edge.com/T06JRN0TA-U040UG6G4VB-f080d5028a70-512',
       role: 'user',
       description: '',
@@ -64,7 +64,7 @@ db.query(createTableQuery, (err : any) => {
     {
       username: 'admin',
       password: '1478963',
-      email: 'jane.doe@example.com',
+      email: 'admin@email.ai',
       profile_pic: 'https://example.com/profile/janedoe.png',
       role: 'admin',
       description: 'Administrator of the system',

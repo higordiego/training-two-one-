@@ -23,9 +23,11 @@ export const getUserById = (req: Request, res: Response) => {
   const query = `SELECT * FROM users WHERE id = ?`;
 
   db.execute(query, [id], (err: any, results: any) => {
+    
     if (err) {
       return res.status(500).json({ error: err.message });
     }
+
     if (results.length === 0) {
       return res.status(404).json({ error: "User not found" });
     }

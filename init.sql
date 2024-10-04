@@ -12,6 +12,6 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, password, email, profile_pic, role, description, full_name, date_of_birth, location) VALUES
-('francoatmega', '49EFEF5F70D47ADC2DB2EB397FBEF5F7BC560E29', 'jardel.matias@hackincariri.com.br', 'https://ca.slack-edge.com/T06JRN0TA-U040UG6G4VB-f080d5028a70-512', 'user', 'Happy Hacking! ;)', 'Jardel Matias', '1988-11-30', 'Juazeiro do Norte, Brasil'),
-('higordiego', 'EC86376E23B99516BB874A35DB8A3CDB6A95987D', 'higor.diego@hackincariri.com.br', 'https://ca.slack-edge.com/T06JRN0TA-U040UG6G4VB-f080d5028a70-512', 'user', '', 'Higor Diego', '1988-11-30', 'Juazeiro do Norte, Brasil'),
-('admin', '1478963', 'jane.doe@example.com', 'https://example.com/profile/janedoe.png', 'admin', 'Administrator of the system', 'Jane Doe', '1990-01-15', 'São Paulo, Brasil');
+('francoatmega', '49EFEF5F70D47ADC2DB2EB397FBEF5F7BC560E29', 'c4ttr4ck@email.ai', 'https://ca.slack-edge.com/T06JRN0TA-U040UG6G4VB-f080d5028a70-512', 'user', 'Happy Hacking! ;)', 'c4tt4ck', '1988-11-30', 'Juazeiro do Norte, Brasil'),
+('higordiego', 'EC86376E23B99516BB874A35DB8A3CDB6A95987D', 'higor.diego@email.ai', 'https://ca.slack-edge.com/T06JRN0TA-U040UG6G4VB-f080d5028a70-512', 'user', '', 'Higor Diego', '1988-11-30', 'Juazeiro do Norte, Brasil'),
+('admin', '1478963', 'admin@email.ai', 'https://example.com/profile/janedoe.png', 'admin', 'Administrator of the system', 'Jane Doe', '1990-01-15', 'São Paulo, Brasil');
